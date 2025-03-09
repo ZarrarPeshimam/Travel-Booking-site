@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+        }
+        .dashboard-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .dashboard-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .dashboard-container button {
+            width: 150px;
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            transition: background-color 0.2s ease;
+        }
+        #fetchDataBtn {
+            background-color: #4CAF50;
+        }
+        #enterDataBtn {
+            background-color: #2196F3;
+        }
+        #fetchDataBtn:hover {
+            background-color: #45a049;
+        }
+        #enterDataBtn:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Admin Dashboard</h2>
+        <p>Select an action:</p>
+        <button id="fetchDataBtn" onclick="location.href='/fetch-data'">Fetch Details</button>
+        <button id="enterDataBtn" onclick="location.href='new-dashboard.html' ">New Booking</button>
+    </div>
+</body>
+</html>

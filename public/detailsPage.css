@@ -1,0 +1,47 @@
+/* detailsPage.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h3 {
+    color: #333;
+    padding: 20px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+}
+
+.travel-details {
+    font-size: 1.1em;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    line-height: 1.5;
+}
+
+.travel-details p {
+    margin-bottom: 15px; 
+}
+
+strong {
+    color: #007bff;
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 1em;
+    color: #007bff;
+    text-decoration: none;
+    padding-left: 30px;
+}
+
+a:hover {
+    text-decoration: underline;
+}

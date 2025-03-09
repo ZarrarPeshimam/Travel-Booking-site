@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard-2</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+        }
+        .dashboard-container {
+            text-align: center;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            max-width: 350px;
+            width: 90%;
+        }
+        .dashboard-container h2 {
+            margin-bottom: 25px;
+            color: #333;
+        }
+        .dashboard-container p {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 16px;
+        }
+        .dashboard-container button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+        #old {
+            background-color: #4CAF50;
+        }
+        #old:hover {
+            background-color: #45a049;
+        }
+        #new {
+            background-color: #2196F3;
+        }
+        #new:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>New Booking</h2>
+        <p>Select an action:</p>
+        <button id="old" onclick="location.href='/check-customer'">Existing Customer</button>
+        <button id="new" onclick="location.href='/add-data'">New Customer</button>
+    </div>
+</body>
+</html>

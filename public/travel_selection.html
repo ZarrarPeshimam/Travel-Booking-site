@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Details Form</title>
+    <style>
+        /* Center the form on the page */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        /* Style the form container */
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: left;
+        }
+
+        /* Center title text */
+        .form-container h2 {
+            text-align: center;
+        }
+
+        /* Style form labels and inputs */
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="date"],
+        .form-container input[type="time"],
+        .form-container input[type="number"],
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        /* Style the submit button */
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        /* Change button color on hover */
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        /* Style the success message */
+        .success-message {
+            display: none;
+            text-align: center;
+            color: green;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Travel Details Form</h2>
+        <form action="/add-travel" method="POST">
+            <input type="hidden" name="customer_id" id="customerIdInput">
+            <label for="travel_mode">Travel Mode:</label>
+            <select name="travel_mode" required onchange="toggleTravelClassOptions()">
+                <option value="">Select Mode</option>
+                <option value="train">Train</option>
+                <option value="flight">Flight</option>
+            </select>
+
+            <!-- Dynamic Travel Class Options -->
+            <label for="travel_class">Travel Class:</label>
+            <select name="travel_class" id="travel_class" required>
+                <!-- Options will be populated based on travel mode selection -->
+            </select>
+
+            <label for="travel_date">Travel Date:</label>
+            <input type="date" name="travel_date" required>
+
+            <label for="departure_time">Departure Time:</label>
+            <input type="time" name="departure_time" id="departure_time" required onchange="calculateArrivalTime()">
+
+            <label for="departure_location">Departure Location:</label>
+            <input type="text" name="departure" required>
+
+            <label for="destination_location">Destination Location:</label>
+            <input type="text" name="destination" required>
+
+            <label for="arrival_time">Arrival Time:</label>
+            <input type="text" id="arrival_time" name="arrival_time" readonly>
+
+            <!-- Travel Number (Train or Flight No) -->
+            <label for="travel_number">Travel Number (Train No / Flight No):</label>
+            <input type="text" name="travel_number" id="travel_number" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const customer_id = urlParams.get('customer_id');
+        document.getElementById('customerIdInput').value = customer_id;
+        console.log("Customer ID from URL:", customer_id);
+
+        function toggleTravelClassOptions() {
+            const travelClassSelect = document.getElementById("travel_class");
+            const travelMode = document.querySelector("select[name='travel_mode']").value;
+            const travelNumberInput = document.getElementById("travel_number");
+
+            // Clear existing options
+            travelClassSelect.innerHTML = "";
+
+            if (travelMode === "flight") {
+                // Flight options
+                const options = ["Economic", "Business", "First Class"];
+                options.forEach(option => {
+                    const opt = document.createElement("option");
+                    opt.value = option;
+                    opt.text = option;
+                    travelClassSelect.add(opt);
+                });
+                // Make the travel number input editable for flight number
+                travelNumberInput.readOnly = false;
+                travelNumberInput.placeholder = "Enter Flight Number";
+            } else if (travelMode === "train") {
+                // Train options
+                const options = ["First AC", "Second AC", "Third AC"];
+                options.forEach(option => {
+                    const opt = document.createElement("option");
+                    opt.value = option;
+                    opt.text = option;
+                    travelClassSelect.add(opt);
+                });
+                // Make the travel number input editable for train number
+                travelNumberInput.readOnly = false;
+                travelNumberInput.placeholder = "Enter Train Number";
+            }
+        }
+
+        function calculateArrivalTime() {
+            const departureTime = document.getElementById('departure_time').value;
+            if (departureTime) {
+                const [hours, minutes] = departureTime.split(':').map(Number);
+                const departureDate = new Date(2024, 0, 1, hours, minutes);
+
+                // Generate a random value between 1.5 hours (90 minutes) and 4 hours (240 minutes)
+                const randomAddMinutes = 90 + Math.random() * 150;
+                const arrivalDate = new Date(departureDate.getTime() + randomAddMinutes * 60 * 1000);
+
+                const arrivalTime = `${arrivalDate.getHours().toString().padStart(2, '0')}:${arrivalDate.getMinutes().toString().padStart(2, '0')}`;
+                document.getElementById('arrival_time').value = arrivalTime;
+            }
+        }
+    </script>
+</body>
+</html>
